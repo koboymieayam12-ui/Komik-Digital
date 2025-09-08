@@ -5,25 +5,93 @@
     <title>Perjalanan Artha Menuju Ketiga Candi</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f0f0f0;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark Mode */
+        body.dark {
+            background-color: #121212;
+            color: #ddd;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        #toggle-theme {
+            background-color: white;
+            color: #2575fc;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        #toggle-theme:hover {
+            background-color: #2575fc;
+            color: white;
+        }
+
+        body.dark nav {
+            background: linear-gradient(to right, #333, #555);
+        }
+        body.dark #toggle-theme {
+            background-color: #555;
+            color: #ddd;
+        }
+        body.dark #toggle-theme:hover {
+            background-color: #ddd;
+            color: #333;
         }
 
         /* About Me */
         #about-me {
-            background-color: #ffffff;
-            padding: 30px;
+            background: linear-gradient(to right, #ffe29f, #ffa99f);
+            padding: 50px 20px;
             text-align: center;
-            border-bottom: 2px solid #ddd;
-        }
-        #about-me h2 {
             color: #333;
+            transition: background 0.3s, color 0.3s;
         }
+        body.dark #about-me {
+            background: linear-gradient(to right, #222, #444);
+            color: #ddd;
+        }
+
+        #about-me h2 {
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+
         #about-me p {
-            color: #555;
-            font-size: 16px;
+            font-size: 18px;
+            max-width: 700px;
+            margin: auto;
         }
 
         /* Komik */
@@ -32,43 +100,71 @@
             margin: 20px auto;
             max-width: 90%;
             height: auto;
+            border-radius: 10px;
+            transition: filter 0.3s;
+        }
+        body.dark .comic img {
+            filter: brightness(0.8);
         }
 
         /* Kesimpulan */
         #kesimpulan {
-            padding: 30px;
-            margin: 20px 0;
+            padding: 50px 20px;
+            text-align: center;
         }
 
         .kesimpulan-box {
             background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: auto;
             line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+        }
+
+        body.dark .kesimpulan-box {
+            background-color: #1e1e1e;
+            color: #ddd;
+            box-shadow: 0px 5px 15px rgba(255,255,255,0.05);
         }
 
         #kesimpulan h2 {
-            text-align: center;
-            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
         }
 
         .kesimpulan-box p {
             margin-bottom: 15px;
-            color: #555;
+        }
+
+        /* Smooth scroll for navbar links */
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
 <body>
 
+<!-- Navbar -->
+<nav>
+    <div>
+        <a href="#about-me">About Me</a>
+        <a href="#comic">Komik</a>
+        <a href="#kesimpulan">Kesimpulan</a>
+    </div>
+    <button id="toggle-theme">🌙 Gelap/Terang</button>
+</nav>
+
 <!-- About Me -->
 <section id="about-me">
     <h2>About Me</h2>
-    <p>Halo! Aku Widya Puteri Istiarta, pembuat komik ini.</p>
+    <p>Halo!Namaku Widya Puteri Istiarta, umurku 15 tahun. Aku pembuat komik ini. Aku suka membaca buku dan menggambar. Selaman membaca yaa~</p>
 </section>
 
 <!-- Komik -->
-<main class="comic">
+<main class="comic" id="comic">
     <img src="cover.jpg" alt="Cover">
     <img src="page1.jpg" alt="Halaman 1">
     <img src="page2.jpg" alt="Halaman 2">
@@ -94,6 +190,13 @@
         <p>Sekian dari perjalananku dari ketiga Candi di Klaten, terima kasih.<br>—Artha</p>
     </div>
 </section>
+
+<script>
+    const toggleBtn = document.getElementById('toggle-theme');
+    toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+    });
+</script>
 
 </body>
 </html>
