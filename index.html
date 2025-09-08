@@ -1,65 +1,73 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Komik Digital</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #eee;
-      line-height: 1.6;
-    }
-    header {
-      text-align: center;
-      padding: 20px;
-      background: #222;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 1.8em;
-    }
-    header p {
-      margin: 5px 0 0;
-      color: #aaa;
-    }
-    .comic img {
-      width: 100%;
-      max-width: 800px;
-      display: block;
-      margin: 0 auto;
-    }
-    .light {
-      background: #fff;
-      color: #000;
-    }
-    .light header {
-      background: #ddd;
-    }
-    .toggle {
-      margin-top: 10px;
-      cursor: pointer;
-      background: #444;
-      color: #fff;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 5px;
-    }
-    .light .toggle {
-      background: #000;
-      color: #fff;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Perjalanan Artha Menuju Ketiga Candi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        /* About Me */
+        #about-me {
+            background-color: #ffffff;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 2px solid #ddd;
+        }
+        #about-me h2 {
+            color: #333;
+        }
+        #about-me p {
+            color: #555;
+            font-size: 16px;
+        }
+
+        /* Komik */
+        .comic img {
+            display: block;
+            margin: 20px auto;
+            max-width: 90%;
+            height: auto;
+        }
+
+        /* Kesimpulan */
+        #kesimpulan {
+            padding: 30px;
+            margin: 20px 0;
+        }
+
+        .kesimpulan-box {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+            line-height: 1.6;
+        }
+
+        #kesimpulan h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .kesimpulan-box p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Perjalanan Artha menuju Ketiga Candi</h1>
-    <p>Author: Widya Puteri Istiarta</p>
-    <button class="toggle" onclick="toggleMode()">🌙 / ☀️</button>
-  </header>
 
+<!-- About Me -->
+<section id="about-me">
+    <h2>About Me</h2>
+    <p>Halo! Aku Widya Puteri Istiarta, pembuat komik ini.</p>
+</section>
+
+<!-- Komik -->
 <main class="comic">
     <img src="cover.jpg" alt="Cover">
     <img src="page1.jpg" alt="Halaman 1">
@@ -73,10 +81,19 @@
     <img src="page9.jpg" alt="Halaman 9">
 </main>
 
-  <script>
-    function toggleMode() {
-      document.body.classList.toggle('light');
-    }
-  </script>
+<!-- Kesimpulan -->
+<section id="kesimpulan">
+    <h2>Kesimpulan Perjalananku</h2>
+    <div class="kesimpulan-box">
+        <p>Petualangan dimulai dengan Candi Merak, yang merupakan candi Hindu yang tersembunyi. Dari sini, aku belajar tentang ketenangan dan keunikan arsitektur yang megah meskipun berukuran kecil, membuktikan bahwa keindahan bisa ditemukan di tempat yang tak terduga.</p>
+
+        <p>Perjalanan kedua aku yaitu Candi Plaosan, aku merasakan perpaduan budaya yang indah. Sebagai candi Buddha yang dibangun untuk ratu, tempat ini menunjukkan toleransi dan cinta kasih.</p>
+
+        <p>Candi terakhir yang aku kunjungi adalah Candi Sojiwan, yang terkenal dengan relief-relief fabelnya yang kaya akan cerita. Melalui candi ini, aku tidak hanya mengagumi arsitektur, tapi juga belajar tentang nilai-nilai moral dan kebijaksanaan yang disampaikan secara turun-temurun melalui kisah-kisah.</p>
+
+        <p>Sekian dari perjalananku dari ketiga Candi di Klaten, terima kasih.<br>—Artha</p>
+    </div>
+</section>
+
 </body>
 </html>
