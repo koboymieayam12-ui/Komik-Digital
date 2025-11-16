@@ -6,8 +6,20 @@
 <title>Komik Digital — Pelita</title>
 <style>
   :root{
-    --bg:#fbf7f0; --card:#fff; --accent:#f2bf4f; --muted:#7a7a7a;
+    --bg:#fbf7f0; 
+    --card:#fff; 
+    --accent:#f2bf4f; 
+    --muted:#7a7a7a;
   }
+
+  /* ========== DARK MODE VARIABEL ========== */
+  body.dark{
+    --bg:#1a1a1a;
+    --card:#2a2a2a;
+    --accent:#aa861f;
+    --muted:#c5c5c5;
+  }
+
   *{box-sizing:border-box}
   body{
     margin:0;
@@ -15,14 +27,34 @@
     background:var(--bg);
     color:#222;
     text-align:center;
+    transition: background .3s ease, color .3s ease;
   }
   header{
     background:var(--accent);
     padding:22px 16px;
     box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    position:relative;
   }
   h1{margin:0;font-size:22px;letter-spacing:0.4px}
   p.subtitle{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+  /* ===== TOMBOL DARK MODE ===== */
+  #toggle-theme{
+    position:absolute;
+    right:16px;
+    top:16px;
+    background:#fff;
+    border:none;
+    padding:6px 10px;
+    font-size:14px;
+    border-radius:8px;
+    cursor:pointer;
+  }
+  body.dark #toggle-theme{
+    background:#333;
+    color:#fff;
+  }
+
   .container{
     width:92%;
     max-width:720px;
@@ -40,7 +72,10 @@
     transition:transform .18s ease,box-shadow .18s ease;
     cursor:zoom-in;
   }
-  .card:hover{transform:translateY(-4px); box-shadow:0 10px 26px rgba(20,20,20,0.09)}
+  .card:hover{
+    transform:translateY(-4px); 
+    box-shadow:0 10px 26px rgba(20,20,20,0.09)
+  }
   .card img{
     width:100%;
     height:auto;
@@ -50,12 +85,14 @@
   }
   .card img:hover{transform:scale(1.02)}
 
-  /* LIGHTBOX */
   #lightbox{
     position:fixed; inset:0; display:none; place-items:center;
     background:rgba(0,0,0,0.78); z-index:9999;
   }
-  #lightbox img{max-width:92%; max-height:92%; border-radius:8px; box-shadow:0 8px 40px rgba(0,0,0,0.6)}
+  #lightbox img{
+    max-width:92%; max-height:92%; border-radius:8px; 
+    box-shadow:0 8px 40px rgba(0,0,0,0.6)
+  }
   #lightbox .close{
     position:absolute; top:18px; right:18px; color:#fff; font-size:18px;
     background:rgba(255,255,255,0.08); padding:6px 10px; border-radius:8px; cursor:pointer;
@@ -72,10 +109,13 @@
 <header>
   <h1>Komik Digital</h1>
   <p class="subtitle">"Pelita" — Perjalanan Artha Menjelajahi Ke-tiga Candi</p>
+
+  <!-- TOMBOL DARK MODE -->
+  <button id="toggle-theme">🌙</button>
+
 </header>
 
 <main class="container" id="gallery">
-  <!-- Replace or keep list as long as file exists in repo root -->
 
 <div class="container">
 
@@ -98,7 +138,6 @@
 </div>
 </main>
 
-<!-- Lightbox -->
 <div id="lightbox" onclick="closeLightbox(event)">
   <div class="close" onclick="closeLightbox(event)">✕</div>
   <img id="lightbox-img" src="" alt="Zoomed">
@@ -114,20 +153,19 @@
     const lbImg = document.getElementById('lightbox-img');
     lbImg.src = imgEl.src;
     lb.style.display = 'grid';
-    // prevent body scroll while open
     document.body.style.overflow = 'hidden';
   }
+
   function closeLightbox(e){
-    // if clicked outside image or on close button -> close
     const target = e.target;
     const lb = document.getElementById('lightbox');
-    if(target.id === 'lightbox' || target.classList.contains('close') ){
+    if(target.id === 'lightbox' || target.classList.contains('close')){
       lb.style.display = 'none';
       document.body.style.overflow = '';
       document.getElementById('lightbox-img').src = '';
     }
   }
-  // optional: escape key closes lightbox
+
   document.addEventListener('keydown', e=>{
     if(e.key === 'Escape'){
       const lb = document.getElementById('lightbox');
@@ -138,6 +176,11 @@
       }
     }
   });
+
+  /* DARK MODE SCRIPT — TIDAK MENGGANGGU KODE LAIN */
+  document.getElementById("toggle-theme").onclick = ()=>{
+    document.body.classList.toggle("dark");
+  };
 </script>
 
 </body>
