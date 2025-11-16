@@ -1,190 +1,137 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>Komik Digital</title>
-
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Komik Digital — Pelita</title>
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+  :root{
+    --bg:#fbf7f0; --card:#fff; --accent:#f2bf4f; --muted:#7a7a7a;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background:var(--bg);
+    color:#222;
+    text-align:center;
+  }
+  header{
+    background:var(--accent);
+    padding:22px 16px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+  }
+  h1{margin:0;font-size:22px;letter-spacing:0.4px}
+  p.subtitle{margin:6px 0 0;color:var(--muted);font-size:13px}
+  .container{
+    width:92%;
+    max-width:720px;
+    margin:24px auto;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
 
-    body {
-        font-family: "Poppins", sans-serif;
-        background-color: #f2f2f2;
-        color: #333;
-        transition: 0.3s;
-    }
+  .card{
+    background:var(--card);
+    border-radius:10px;
+    padding:10px;
+    box-shadow:0 6px 18px rgba(20,20,20,0.06);
+    transition:transform .18s ease,box-shadow .18s ease;
+    cursor:zoom-in;
+  }
+  .card:hover{transform:translateY(-4px); box-shadow:0 10px 26px rgba(20,20,20,0.09)}
+  .card img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:8px;
+    transition:transform .18s ease;
+  }
+  .card img:hover{transform:scale(1.02)}
 
-    body.dark {
-        background-color: #1c1c1c;
-        color: #eee;
-    }
+  /* LIGHTBOX */
+  #lightbox{
+    position:fixed; inset:0; display:none; place-items:center;
+    background:rgba(0,0,0,0.78); z-index:9999;
+  }
+  #lightbox img{max-width:92%; max-height:92%; border-radius:8px; box-shadow:0 8px 40px rgba(0,0,0,0.6)}
+  #lightbox .close{
+    position:absolute; top:18px; right:18px; color:#fff; font-size:18px;
+    background:rgba(255,255,255,0.08); padding:6px 10px; border-radius:8px; cursor:pointer;
+  }
 
-    /* Header */
-    header {
-        text-align: center;
-        padding: 30px 20px;
-        background: #ffd86b;
-        border-bottom: 3px solid #e6c159;
-        border-radius: 0 0 20px 20px;
-    }
-
-    header h1 {
-        font-size: 32px;
-        font-weight: 600;
-    }
-
-    header p {
-        margin-top: 5px;
-        opacity: 0.8;
-        font-size: 15px;
-    }
-
-    #toggle-theme {
-        margin-top: 12px;
-        padding: 8px 18px;
-        background: #fff;
-        border: 2px solid #333;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: 0.2s;
-    }
-
-    body.dark #toggle-theme {
-        background: #333;
-        color: #eee;
-        border-color: #eee;
-    }
-
-    #toggle-theme:hover {
-        transform: scale(1.05);
-    }
-
-    /* Comic container */
-    .comic-container {
-        width: 92%;
-        max-width: 850px;
-        margin: 30px auto;
-        display: flex;
-        flex-direction: column;
-        gap: 22px;
-    }
-
-    .panel {
-        background: white;
-        border-radius: 10px;
-        padding: 10px;
-        border: 2px solid #ccc;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        cursor: zoom-in;
-        transition: 0.2s;
-    }
-
-    .panel:hover {
-        transform: translateY(-3px);
-    }
-
-    body.dark .panel {
-        background: #2d2d2d;
-        border-color: #555;
-        box-shadow: 0 4px 10px rgba(255,255,255,0.08);
-    }
-
-    /* Gambar */
-    .panel img {
-        width: 100%;
-        border-radius: 6px;
-        transition: 0.3s ease;
-    }
-
-    .panel img:hover {
-        transform: scale(1.02);
-    }
-
-    /* FULLSCREEN ZOOM */
-    #zoom-view {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0,0,0,0.8);
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-    }
-
-    #zoom-view img {
-        max-width: 90%;
-        max-height: 90%;
-        border-radius: 10px;
-        box-shadow: 0 0 20px rgba(255,255,255,0.3);
-    }
-
-    #zoom-view:active {
-        display: none;
-    }
-
-    footer {
-        text-align: center;
-        margin: 40px 0 20px;
-        opacity: 0.7;
-        font-size: 14px;
-    }
+  footer{margin:36px 0 60px;color:var(--muted); font-size:13px}
+  @media(min-width:900px){
+    h1{font-size:26px}
+  }
 </style>
 </head>
-
 <body>
 
 <header>
-    <h1>Komik Digital</h1>
-    <p>"Pelita" Perjalanan Artha Menjelajahi Ke-tiga Candi</p>
-
-    <button id="toggle-theme">🌙 Mode</button>
+  <h1>Komik Digital</h1>
+  <p class="subtitle">"Pelita" — Perjalanan Artha Menjelajahi Ke-tiga Candi</p>
 </header>
 
-<!-- Zoom viewer -->
-<div id="zoom-view" onclick="this.style.display='none'">
-    <img id="zoom-img" src="">
+<main class="container" id="gallery">
+  <!-- Replace or keep list as long as file exists in repo root -->
+  <div class="card"><img src="cover.jpg" alt="Cover" onclick="openLightbox(this)"></div>
+  <div class="card"><img src="page1.jpg" alt="Page 1" onclick="openLightbox(this)"></div>
+  <div class="card"><img src="page2.jpg" alt="Page 2" onclick="openLightbox(this)"></div>
+  <div class="card"><img src="page3.jpg" alt="Page 3" onclick="openLightbox(this)"></div>
+  <div class="card"><img src="page4.jpg" alt="Page 4" onclick="openLightbox(this)"></div>
+  <div class="card"><img src="page5.jpg" alt="Page 5" onclick="openLightbox(this)"></div>
+  <div class="card"><img src="page6.jpg" alt="Page 6" onclick="openLightbox(this)"></div>
+  <div class="card"><img src="page7.jpg" alt="Page 7" onclick="openLightbox(this)"></div>
+  <div class="card"><img src="page8.jpg" alt="Page 8" onclick="openLightbox(this)"></div>
+  <div class="card"><img src="page9.jpg" alt="Page 9" onclick="openLightbox(this)"></div>
+  <div class="card"><img src="page10.jpg" alt="Page 10" onclick="openLightbox(this)"></div>
+  <div class="card"><img src="page11.jpg" alt="Page 11" onclick="openLightbox(this)"></div>
+  <div class="card"><img src="page12.jpg" alt="Page 12" onclick="openLightbox(this)"></div>
+  <div class="card"><img src="page13.jpg" alt="Page 13" onclick="openLightbox(this)"></div>
+</main>
+
+<!-- Lightbox -->
+<div id="lightbox" onclick="closeLightbox(event)">
+  <div class="close" onclick="closeLightbox(event)">✕</div>
+  <img id="lightbox-img" src="" alt="Zoomed">
 </div>
 
-<!-- Comic Images -->
-<section class="comic-container">
-    <div class="panel"><img src="image/cover.jpg" onclick="zoom(this.src)"></div>
-    <div class="panel"><img src="image/page1.jpg" onclick="zoom(this.src)"></div>
-    <div class="panel"><img src="image/page2.jpg" onclick="zoom(this.src)"></div>
-    <div class="panel"><img src="image/page3.jpg" onclick="zoom(this.src)"></div>
-    <div class="panel"><img src="image/page4.jpg" onclick="zoom(this.src)"></div>
-    <div class="panel"><img src="image/page5.jpg" onclick="zoom(this.src)"></div>
-    <div class="panel"><img src="image/page6.jpg" onclick="zoom(this.src)"></div>
-    <div class="panel"><img src="image/page7.jpg" onclick="zoom(this.src)"></div>
-    <div class="panel"><img src="image/page8.jpg" onclick="zoom(this.src)"></div>
-    <div class="panel"><img src="image/page9.jpg" onclick="zoom(this.src)"></div>
-    <div class="panel"><img src="image/page10.jpg" onclick="zoom(this.src)"></div>
-    <div class="panel"><img src="image/page11.jpg" onclick="zoom(this.src)"></div>
-    <div class="panel"><img src="image/page12.jpg" onclick="zoom(this.src)"></div>
-    <div class="panel"><img src="image/page13.jpg" onclick="zoom(this.src)"></div>
-</section>
-
 <footer>
-    Karya : Widya Puteri Istiarta✧👩🍭
+  Karya: <strong>Widya Puteri Istiarta👩🍭</strong>
 </footer>
 
 <script>
-    const toggle = document.getElementById("toggle-theme");
-    toggle.addEventListener("click", () => {
-        document.body.classList.toggle("dark");
-    });
-
-    function zoom(src) {
-        document.getElementById("zoom-img").src = src;
-        document.getElementById("zoom-view").style.display = "flex";
+  function openLightbox(imgEl){
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    lbImg.src = imgEl.src;
+    lb.style.display = 'grid';
+    // prevent body scroll while open
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(e){
+    // if clicked outside image or on close button -> close
+    const target = e.target;
+    const lb = document.getElementById('lightbox');
+    if(target.id === 'lightbox' || target.classList.contains('close') ){
+      lb.style.display = 'none';
+      document.body.style.overflow = '';
+      document.getElementById('lightbox-img').src = '';
     }
+  }
+  // optional: escape key closes lightbox
+  document.addEventListener('keydown', e=>{
+    if(e.key === 'Escape'){
+      const lb = document.getElementById('lightbox');
+      if(lb.style.display === 'grid'){
+        lb.style.display = 'none';
+        document.body.style.overflow = '';
+        document.getElementById('lightbox-img').src = '';
+      }
+    }
+  });
 </script>
 
 </body>
