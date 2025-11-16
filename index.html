@@ -1,191 +1,191 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Perjalanan Artha Menjelajahi Ketiga Candi</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-            color: #333;
-            transition: background-color 0.3s, color 0.3s;
-        }
+<meta charset="UTF-8">
+<title>Komik Digital</title>
 
-        /* Dark Mode */
-        body.dark {
-            background-color: #121212;
-            color: #ddd;
-        }
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        /* Navbar */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+    body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f2f2f2;
+        color: #333;
+        transition: 0.3s;
+    }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-            font-weight: bold;
-        }
+    body.dark {
+        background-color: #1c1c1c;
+        color: #eee;
+    }
 
-        nav a:hover {
-            text-decoration: underline;
-        }
+    /* Header */
+    header {
+        text-align: center;
+        padding: 30px 20px;
+        background: #ffd86b;
+        border-bottom: 3px solid #e6c159;
+        border-radius: 0 0 20px 20px;
+    }
 
-        #toggle-theme {
-            background-color: white;
-            color: #2575fc;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-        #toggle-theme:hover {
-            background-color: #2575fc;
-            color: white;
-        }
+    header h1 {
+        font-size: 32px;
+        font-weight: 600;
+    }
 
-        body.dark nav {
-            background: linear-gradient(to right, #333, #555);
-        }
-        body.dark #toggle-theme {
-            background-color: #555;
-            color: #ddd;
-        }
-        body.dark #toggle-theme:hover {
-            background-color: #ddd;
-            color: #333;
-        }
+    header p {
+        margin-top: 5px;
+        opacity: 0.8;
+        font-size: 15px;
+    }
 
-        /* About Me */
-        #about-me {
-            background: linear-gradient(to right, #ffe29f, #ffa99f);
-            padding: 50px 20px;
-            text-align: center;
-            color: #333;
-            transition: background 0.3s, color 0.3s;
-        }
-        body.dark #about-me {
-            background: linear-gradient(to right, #222, #444);
-            color: #ddd;
-        }
+    #toggle-theme {
+        margin-top: 12px;
+        padding: 8px 18px;
+        background: #fff;
+        border: 2px solid #333;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.2s;
+    }
 
-        #about-me h2 {
-            margin-bottom: 20px;
-            font-size: 32px;
-        }
+    body.dark #toggle-theme {
+        background: #333;
+        color: #eee;
+        border-color: #eee;
+    }
 
-        #about-me p {
-            font-size: 18px;
-            max-width: 700px;
-            margin: auto;
-        }
+    #toggle-theme:hover {
+        transform: scale(1.05);
+    }
 
-        /* Komik */
-        .comic img {
-            display: block;
-            margin: 20px auto;
-            max-width: 90%;
-            height: auto;
-            border-radius: 10px;
-            transition: filter 0.3s;
-        }
-        body.dark .comic img {
-            filter: brightness(0.8);
-        }
+    /* Comic container */
+    .comic-container {
+        width: 92%;
+        max-width: 850px;
+        margin: 30px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+    }
 
-        /* Kesimpulan */
-        #kesimpulan {
-            padding: 50px 20px;
-            text-align: center;
-        }
+    .panel {
+        background: white;
+        border-radius: 10px;
+        padding: 10px;
+        border: 2px solid #ccc;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        cursor: zoom-in;
+        transition: 0.2s;
+    }
 
-        .kesimpulan-box {
-            background-color: #ffffff;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
-            max-width: 800px;
-            margin: auto;
-            line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-        }
+    .panel:hover {
+        transform: translateY(-3px);
+    }
 
-        body.dark .kesimpulan-box {
-            background-color: #1e1e1e;
-            color: #ddd;
-            box-shadow: 0px 5px 15px rgba(255,255,255,0.05);
-        }
+    body.dark .panel {
+        background: #2d2d2d;
+        border-color: #555;
+        box-shadow: 0 4px 10px rgba(255,255,255,0.08);
+    }
 
-        #kesimpulan h2 {
-            margin-bottom: 30px;
-            font-size: 28px;
-        }
+    /* Gambar */
+    .panel img {
+        width: 100%;
+        border-radius: 6px;
+        transition: 0.3s ease;
+    }
 
-        .kesimpulan-box p {
-            margin-bottom: 15px;
-        }
+    .panel img:hover {
+        transform: scale(1.02);
+    }
 
-        /* Smooth scroll for navbar links */
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
+    /* FULLSCREEN ZOOM */
+    #zoom-view {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.8);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    #zoom-view img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+
+    #zoom-view:active {
+        display: none;
+    }
+
+    footer {
+        text-align: center;
+        margin: 40px 0 20px;
+        opacity: 0.7;
+        font-size: 14px;
+    }
+</style>
 </head>
+
 <body>
 
-<!-- Navbar -->
-<nav>
-    <div>
-        
-        <a href="#comic">Komik</a>
-    </div>
-    <button id="toggle-theme">🌙 Gelap/Terang</button>
-</nav>
+<header>
+    <h1>Komik Digital</h1>
+    <p>"Pelita" Perjalanan Artha Menjelajahi Ke-tiga Candi</p>
 
+    <button id="toggle-theme">🌙 Mode</button>
+</header>
+
+<!-- Zoom viewer -->
+<div id="zoom-view" onclick="this.style.display='none'">
+    <img id="zoom-img" src="">
+</div>
+
+<!-- Comic Images -->
+<section class="comic-container">
+    <div class="panel"><img src="image/cover.jpg" onclick="zoom(this.src)"></div>
+    <div class="panel"><img src="image/page1.jpg" onclick="zoom(this.src)"></div>
+    <div class="panel"><img src="image/page2.jpg" onclick="zoom(this.src)"></div>
+    <div class="panel"><img src="image/page3.jpg" onclick="zoom(this.src)"></div>
+    <div class="panel"><img src="image/page4.jpg" onclick="zoom(this.src)"></div>
+    <div class="panel"><img src="image/page5.jpg" onclick="zoom(this.src)"></div>
+    <div class="panel"><img src="image/page6.jpg" onclick="zoom(this.src)"></div>
+    <div class="panel"><img src="image/page7.jpg" onclick="zoom(this.src)"></div>
+    <div class="panel"><img src="image/page8.jpg" onclick="zoom(this.src)"></div>
+    <div class="panel"><img src="image/page9.jpg" onclick="zoom(this.src)"></div>
+    <div class="panel"><img src="image/page10.jpg" onclick="zoom(this.src)"></div>
+    <div class="panel"><img src="image/page11.jpg" onclick="zoom(this.src)"></div>
+    <div class="panel"><img src="image/page12.jpg" onclick="zoom(this.src)"></div>
+    <div class="panel"><img src="image/page13.jpg" onclick="zoom(this.src)"></div>
 </section>
 
-<!-- Komik -->
-<main class="comic" id="comic">
-    <img src="cover.jpg" alt="Cover">
-    <img src="page1.jpg" alt="Halaman 1">
-    <img src="page2.jpg" alt="Halaman 2">
-    <img src="page3.jpg" alt="Halaman 3">
-    <img src="page4.jpg" alt="Halaman 4">
-    <img src="page5.jpg" alt="Halaman 5">
-    <img src="page6.jpg" alt="Halaman 6">
-    <img src="page7.jpg" alt="Halaman 7">
-    <img src="page8.jpg" alt="Halaman 8">
-    <img src="page9.jpg" alt="Halaman 9">
-    <img src="page10.jpg" alt="Halaman 10">
-    <img src="page11.jpg" alt="Halaman 11">
-    <img src="page12.jpg" alt="Halaman 12">
-    <img src="page13.jpg" alt="Halaman 13">
-    
-</main>
-
-
-</section>
+<footer>
+    Karya : Widya Puteri Istiarta✧👩🍭
+</footer>
 
 <script>
-    const toggleBtn = document.getElementById('toggle-theme');
-    toggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('dark');
+    const toggle = document.getElementById("toggle-theme");
+    toggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark");
     });
+
+    function zoom(src) {
+        document.getElementById("zoom-img").src = src;
+        document.getElementById("zoom-view").style.display = "flex";
+    }
 </script>
 
 </body>
-    </html>
+</html>
